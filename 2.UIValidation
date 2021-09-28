@@ -1,0 +1,38 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class ClearTrip {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver",	"C:\\Users\\Quality Assurance\\OneDrive\\Documents\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize(); //maximize window
+		driver.get("https://www.cleartrip.com/");
+
+		WebElement staticdropdown1 = driver.findElement(By.xpath("//*[@id='root']/div/div/div[1]/div/div[2]/div/div[4]/div/div[1]/select"));
+		Select dropdown1 = new Select(staticdropdown1);
+		dropdown1.selectByValue("2");
+		Thread.sleep(3000L);
+
+		WebElement staticdropdown = driver.findElement(By.xpath("//*[@id='root']/div/div/div[1]/div/div[2]/div/div[4]/div/div[3]/select"));
+		Select dropdown = new Select(staticdropdown);
+		dropdown.selectByValue("2");
+		Thread.sleep(3000L);
+		
+		driver.findElement(By.cssSelector("[class='flex flex-middle p-relative homeCalender']")).click();
+		Thread.sleep(3000L);
+		driver.findElement(By.cssSelector("[class='DayPicker-Day DayPicker-Day--start DayPicker-Day--selected DayPicker-Day--today']")).click();
+
+		driver.findElement(By.cssSelector("[class='pr-1']")).click();
+		driver.findElement(By.cssSelector("[placeholder='Airline name']")).sendKeys("Indigo");
+		driver.findElement(By.cssSelector("[class='px-7 bg-primary-500 hover:bg-primary-600 c-white bc-transparent c-pointer w-100p py-2 px-5 h-10 fs-4 fw-600 t-all button bs-solid tp-color td-500 bw-1 br-4 lh-solid box-border']")).click();
+
+		System.out.println(driver.findElement(By.cssSelector("[class='to-ellipsis o-hidden ws-nowrap fs-3 c-white']")).getText());
+
+	}
+
+}	
